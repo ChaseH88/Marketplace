@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
+import NewMarket from "../components/NewMarket";
+import MarketList from "../components/MarketList";
+
 
 const HomePage = () => {
   
   //const [] = useState(null);
 
   return(
-    <div>Home</div>
+    <Fragment>
+      <NewMarket />
+      <MarketList />
+    </Fragment>
   )
 }
 

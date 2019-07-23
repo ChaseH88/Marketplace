@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, createContext } from "react";
 import "./App.css";
 import { Auth, Hub } from "aws-amplify";  
 import { Authenticator, AmplifyTheme } from "aws-amplify-react";
@@ -11,11 +11,12 @@ import ProfilePage from "./pages/ProfilePage";
 
 // Components
 import NavBar from "./components/Navbar";
-import { async } from "q";
 
 const theme = {
   ...AmplifyTheme
 }
+
+export const UserContext = createContext();
 
 class App extends Component {
 
@@ -42,17 +43,14 @@ class App extends Component {
   onHubCapsule = (capsule) => {
     switch (capsule.payload.event) {
       case "signIn":
-        console.log("Signed In");
         this.getUserData();
         break;
       case "signUp":
-        console.log("Signed Up");
         break
       case "signout":
         this.setState({
           currentUser: null
         });
-        console.log("Signed Out");
         break
       default:
         return;
@@ -72,21 +70,24 @@ class App extends Component {
   }
 
   render(){
-    return !this.state.currentUser ?
+    let { currentUser } = this.state;
+    return !currentUser ?
     (
       <Authenticator theme={theme} />
     ) :
     (
-      <BrowserRouter>
-        <React.Fragment>
-        <NavBar currentUser={this.state.currentUser} signOut={this.handleSignout} />
+      <UserContext.Provider value={{ currentUser }}>
+        <BrowserRouter>
+          <React.Fragment>
+          <NavBar currentUser={currentUser} signOut={this.handleSignout} />
           <Switch>
             <Route exact path="/" component={() => <HomePage />} />
             <Route exact path="/profile" component={() => <ProfilePage />} />
             <Route exact path="/market/:id" render={({ match }) => <MarketPage id={match.params.id}  />} />
           </Switch>
-        </React.Fragment>
-      </BrowserRouter>
+          </React.Fragment>
+        </BrowserRouter>
+      </UserContext.Provider>
     )
   };
 }

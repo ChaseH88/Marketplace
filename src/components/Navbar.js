@@ -26,7 +26,6 @@ const NavBarStyle = styled.section`
 `;
 
 const Navbar = (props) => {
-  console.log(props.currentUser);
   const { username, signOut } = props;
   return(
     <NavBarStyle id="nav">
