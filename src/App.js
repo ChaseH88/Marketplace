@@ -1,4 +1,5 @@
 import React, { Component, createContext } from "react";
+import 'semantic-ui-css/semantic.min.css'
 import "./App.css";
 import { Auth, Hub } from "aws-amplify";  
 import { Authenticator, AmplifyTheme } from "aws-amplify-react";
