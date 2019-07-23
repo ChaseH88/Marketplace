@@ -1,13 +1,13 @@
-import React from "react";
-// prettier-ignore
-// import { Notification, Popover, Button, Dialog, Card, Form, Input, Radio } from "element-react";
+import React, { useState } from "react";
 
-class Product extends React.Component {
-  state = {};
+const Product = () => {
   
-  render() {
-    return <div>Product</div>
-  }
+  //const [] = useState(null);
+  
+  return(
+    <div>Product</div>
+  )
+
 }
 
 export default Product;

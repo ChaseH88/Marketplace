@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
-class HomePage extends React.Component {
-  state = {};
+const HomePage = () => {
+  
+  //const [] = useState(null);
 
-  render() {
-    return <div>Home</div>;
-  }
+  return(
+    <div>Home</div>
+  )
 }
 
 export default HomePage;
